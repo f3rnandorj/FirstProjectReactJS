@@ -17,6 +17,12 @@ module.exports = {
         use: {
           loader: 'babel-loader',
         }
+      }, {
+        test: /\.css$/,
+        use: [
+          { loader: 'style-loader'}, // importações mais completas 
+          { loader: 'css-loader'} // importações de estilo
+        ]
       }
     ]
   }
