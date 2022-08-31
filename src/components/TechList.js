@@ -3,40 +3,50 @@ import React, { Component } from 'react';
 class TechList extends Component {
   state = {
     newTech: '',
-    techs: [
-      'Node.js',
-      'ReactJS',
-      'React Native',
-    ]
+    techs: ['Node.js', 'ReactJS', 'React Native'],
   };
-/*metodo necessita ser arrow para ter acesso ao this*/ 
-  handleInputChange = e => {
-    this.setState({ newTech: e.target.value }); 
-  }
-/*metodo necessita ser arrow para ter acesso ao this*/
-  handleSubmit = e => {
-    e.preventDefault();
-    
-    this.setState({ 
+  /*metodo necessita ser arrow para ter acesso ao this / passando do input para newTechs*/
+  handleInputChange = (e) => {
+    this.setState({ newTech: e.target.value });
+  };
+
+  /*metodo necessita ser arrow para ter acesso ao this / passando de newTech para Techs*/
+  handleSubmit = (e) => {
+    e.preventDefault(); /*deixando de atualizar o brorser ao clicar no enviar*/
+
+    this.setState({
+      /*criando um novo array e adicionando a nova tech*/
       techs: [...this.state.techs, this.state.newTech],
       newTech: '',
     });
-  }
-/*metodo necessita ser arrow para ter acesso ao this*/
+  };
+
+  handleDelete = (tech) => {
+    this.setState({ techs: this.state.techs.filter((t) => t !== tech) });
+  };
+
+  /*metodo necessita ser arrow para ter acesso ao this*/
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <ul>  
-          {this.state.techs.map(tech => <li key={tech}>{tech}</li>)}  
+        <ul>
+          {this.state.techs.map((tech) => (
+            <li key={tech}>
+              {tech}
+              <button onClick={() => this.handleDelete(tech)} type="button">
+                Remover
+              </button>
+            </li>
+          ))}
         </ul>
-        <input 
-          type="text" 
-          onChange={this.handleInputChange} 
-          value={this.state.newTech} 
+        <input
+          type="text"
+          onChange={this.handleInputChange}
+          value={this.state.newTech}
         />
-        <button type='submit'>Enviar</button>
+        <button type="submit">Enviar</button>
       </form>
-    )
+    );
   }
 }
 
