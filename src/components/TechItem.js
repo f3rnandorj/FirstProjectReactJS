@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 /*ou poderia ser props.tech*/
 function TechItem({ tech, onDelete }) {
@@ -11,5 +12,15 @@ function TechItem({ tech, onDelete }) {
     </li>
   );
 }
+
+/*Defaultprops serve para passar informaçoes caso o valor viesse nulo */
+TechItem.defaultProps = {
+  tech: 'Oculto',
+};
+
+TechItem.prototypes = {
+  tech: PropTypes.string,
+  onDelete: PropTypes.func.isRequired,
+};
 
 export default TechItem;
